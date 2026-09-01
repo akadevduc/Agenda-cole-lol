@@ -1,0 +1,4 @@
+C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.AssemblyInfoInputs.cache
+C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.AssemblyInfo.cs
+C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.csproj.CoreCompileInputs.cache
