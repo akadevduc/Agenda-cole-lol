@@ -1,0 +1,4 @@
+C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfoInputs.cache
+C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfo.cs
+C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.csproj.CoreCompileInputs.cache
