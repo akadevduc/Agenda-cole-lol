@@ -1,40 +1,10 @@
 ﻿using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
+using Entidades;
 
 namespace Datos
 {
-    public class FilaPersona
-    {
-        public int Dni { get; set; }
-        public string Apellido { get; set; }
-        public string Nombre { get; set; }
-        public string Calle { get; set; }
-        public string Piso { get; set; }
-        public string Depto { get; set; }
-        public string Ciudad { get; set; }
-        public string Telefono { get; set; }
-        public string Email { get; set; }
-        public int IdCuenta { get; set; }
-        public string FechaApertura { get; set; }
-        public decimal LimiteCredito { get; set; }
-        public string Estado { get; set; }
-        public string CuilCuit { get; set; }
-        public string FechaAlta { get; set; }
-        public string EstadoCivil { get; set; }
-        public string Nacionalidad { get; set; }
-        public string Provincia { get; set; }
-        public string CodigoPostal { get; set; }
-        public string Barrio { get; set; }
-        public string TelefonoAlternativo { get; set; }
-        public string Instagram { get; set; }
-        public string Profesion { get; set; }
-        public string Empresa { get; set; }
-        public string NivelEstudios { get; set; }
-        public string EstadoPersona { get; set; }
-        public string MetodoPago { get; set; }
-        public string Observaciones { get; set; }
-    }
 
     public class PersonaDatos
     {
@@ -109,7 +79,7 @@ namespace Datos
                     DniPersona     INT NOT NULL,
                     FechaApertura  DATE,
                     LimiteCredito  DECIMAL(10,2),
-                    Estado         VARCHAR(20),
+                    EstadoCuenta   VARCHAR(20),
                     FOREIGN KEY (DniPersona) REFERENCES Agenda(Dni)
                 )";
 
@@ -140,11 +110,11 @@ namespace Datos
             "Agenda.Barrio, Agenda.TelefonoAlternativo, Agenda.Instagram, " + "Agenda.Profesion, " +
             "Agenda.Empresa, Agenda.NivelEstudios, Agenda.EstadoPersona, " + "Agenda.MetodoPago, " +
             "Agenda.Observaciones, " + "CuentaCte.Id, CuentaCte.FechaApertura, CuentaCte.LimiteCredito, " +
-            "CuentaCte.Estado";
+            "CuentaCte.EstadoCuenta";
 
-        private FilaPersona LeerFila(MySqlDataReader reader)
+        private Persona LeerFila(MySqlDataReader reader)
         {
-            return new FilaPersona
+            return new Persona
             {
                 Dni = Convert.ToInt32(reader["Dni"]),
                 Apellido = reader["Apellido"].ToString(),
@@ -155,10 +125,10 @@ namespace Datos
                 Ciudad = reader["Ciudad"].ToString(),
                 Telefono = reader["Telefono"].ToString(),
                 Email = reader["Email"].ToString(),
-                IdCuenta = Convert.ToInt32(reader["Id"]),
-                FechaApertura = reader["FechaApertura"].ToString(),
-                LimiteCredito = Convert.ToDecimal(reader["LimiteCredito"]),
-                Estado = reader["Estado"].ToString(),
+                IdCuenta = reader["Id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Id"]),
+                FechaApertura = reader["FechaApertura"] == DBNull.Value ? null : reader["FechaApertura"].ToString(),
+                LimiteCredito = reader["LimiteCredito"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["LimiteCredito"]),
+                EstadoCuenta = reader["EstadoCuenta"] == DBNull.Value ? null : reader["EstadoCuenta"].ToString(),
                 CuilCuit = reader["CuilCuit"].ToString(),
                 FechaAlta = reader["FechaAlta"].ToString(),
                 EstadoCivil = reader["EstadoCivil"].ToString(),
@@ -177,14 +147,14 @@ namespace Datos
             };
         }
 
-        public List<FilaPersona> Buscar(string campo, string valor)
+        public List<Persona> Buscar(string campo, string valor)
         {
             if (!ColumnasBusqueda.TryGetValue(campo, out string columna)) return null;
 
-            var resultados = new List<FilaPersona>();
+            var resultados = new List<Persona>();
 
             string query = $@"SELECT {ColumnasSelect} FROM Agenda 
-                            INNER JOIN CuentaCte ON Agenda.Dni = CuentaCte.DniPersona 
+                            LEFT JOIN CuentaCte ON Agenda.Dni = CuentaCte.DniPersona 
                             WHERE Agenda.{columna} LIKE @Valor";
 
             using (MySqlConnection conexion = new MySqlConnection(_conexionString))
@@ -206,7 +176,7 @@ namespace Datos
             return resultados;
         }
 
-        public bool Add(FilaPersona filaPersona)
+        public bool Add(Persona filaPersona)
         {
             string queryAgenda = "INSERT INTO Agenda (Dni, Apellido, Nombre, Calle, Piso, Depto, Ciudad, Telefono, Email, " +
                                   "CuilCuit, FechaAlta, EstadoCivil, Nacionalidad, Provincia, CodigoPostal, Barrio, " +
@@ -215,8 +185,8 @@ namespace Datos
                                   "@CuilCuit, @FechaAlta, @EstadoCivil, @Nacionalidad, @Provincia, @CodigoPostal, @Barrio, " +
                                   "@TelefonoAlternativo, @Instagram, @Profesion, @Empresa, @NivelEstudios, @EstadoPersona, @MetodoPago, @Observaciones)";
 
-            string queryCuenta = "INSERT INTO CuentaCte (DniPersona, FechaApertura, LimiteCredito, Estado) " +
-                                  "VALUES (@Dni, @FechaApertura, @LimiteCredito, @Estado)";
+            string queryCuenta = "INSERT INTO CuentaCte (DniPersona, FechaApertura, LimiteCredito, EstadoCuenta) " +
+                                  "VALUES (@Dni, @FechaApertura, @LimiteCredito, @EstadoCuenta)";
 
             using (MySqlConnection conexion = new MySqlConnection(_conexionString))
             {
@@ -257,7 +227,7 @@ namespace Datos
                         comandoCuenta.Parameters.AddWithValue("@Dni", filaPersona.Dni);
                         comandoCuenta.Parameters.AddWithValue("@FechaApertura", filaPersona.FechaApertura);
                         comandoCuenta.Parameters.AddWithValue("@LimiteCredito", filaPersona.LimiteCredito);
-                        comandoCuenta.Parameters.AddWithValue("@Estado", filaPersona.Estado);
+                        comandoCuenta.Parameters.AddWithValue("@EstadoCuenta", filaPersona.EstadoCuenta);
                         comandoCuenta.ExecuteNonQuery();
 
                         transaccion.Commit();
@@ -272,7 +242,7 @@ namespace Datos
             }
         }
 
-        public bool Modi(FilaPersona filaPersona)
+        public bool Modi(Persona filaPersona)
         {
             string queryAgenda = "UPDATE Agenda SET Apellido = @Apellido, Nombre = @Nombre, Calle = @Calle, " +
                                   "Piso = @Piso, Depto = @Depto, Ciudad = @Ciudad, Telefono = @Telefono, Email = @Email, " +
@@ -284,7 +254,7 @@ namespace Datos
                                   "WHERE Dni = @Dni";
 
             string queryCuenta = "UPDATE CuentaCte SET FechaApertura = @FechaApertura, " +
-                                  "LimiteCredito = @LimiteCredito, Estado = @Estado WHERE DniPersona = @Dni";
+                                  "LimiteCredito = @LimiteCredito, EstadoCuenta = @EstadoCuenta WHERE DniPersona = @Dni";
 
             using (MySqlConnection conexion = new MySqlConnection(_conexionString))
             {
@@ -325,7 +295,7 @@ namespace Datos
                         comandoCuenta.Parameters.AddWithValue("@Dni", filaPersona.Dni);
                         comandoCuenta.Parameters.AddWithValue("@FechaApertura", filaPersona.FechaApertura);
                         comandoCuenta.Parameters.AddWithValue("@LimiteCredito", filaPersona.LimiteCredito);
-                        comandoCuenta.Parameters.AddWithValue("@Estado", filaPersona.Estado);
+                        comandoCuenta.Parameters.AddWithValue("@EstadoCuenta", filaPersona.EstadoCuenta);
                         comandoCuenta.ExecuteNonQuery();
 
                         transaccion.Commit();

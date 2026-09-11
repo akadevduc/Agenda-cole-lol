@@ -1,53 +1,10 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 
 internal class Program
 {
-    private void BuscarPersona(string dato, PersonaNegocio negocio)
-    {
-        Console.Write($"Ingrese {dato}: ");
-        string buscar = Console.ReadLine();
-        List<Persona> personas = negocio.ObtenerPersona(dato, buscar);
-
-        if (personas == null || personas.Count == 0)
-        {
-            Console.WriteLine("No existe.");
-            return;
-        }
-
-        for (int i = 0; i < personas.Count; i++)
-        {
-            Console.WriteLine($"Encontrado: DNI: {personas[i].Dni}");
-            Console.WriteLine($"Nombre completo: {personas[i].Nombre}, {personas[i].Apellido}");
-            Console.WriteLine($"Calle: {personas[i].Calle}");
-            Console.WriteLine($"Depto: {personas[i].Depto}");
-            Console.WriteLine($"Piso: {personas[i].Piso}");
-            Console.WriteLine($"Ciudad: {personas[i].Ciudad}");
-            Console.WriteLine($"Telefono: {personas[i].Telefono}");
-            Console.WriteLine($"Email: {personas[i].Email}");
-            Console.WriteLine($"CUIL/CUIT: {personas[i].CuilCuit}");
-            Console.WriteLine($"Fecha de alta: {personas[i].FechaAlta}");
-            Console.WriteLine($"Estado civil: {personas[i].EstadoCivil}");
-            Console.WriteLine($"Nacionalidad: {personas[i].Nacionalidad}");
-            Console.WriteLine($"Provincia: {personas[i].Provincia}");
-            Console.WriteLine($"Codigo postal: {personas[i].CodigoPostal}");
-            Console.WriteLine($"Barrio: {personas[i].Barrio}");
-            Console.WriteLine($"Telefono alternativo: {personas[i].TelefonoAlternativo}");
-            Console.WriteLine($"Instagram: {personas[i].Instagram}");
-            Console.WriteLine($"Profesion: {personas[i].Profesion}");
-            Console.WriteLine($"Empresa: {personas[i].Empresa}");
-            Console.WriteLine($"Nivel de estudios: {personas[i].NivelEstudios}");
-            Console.WriteLine($"Estado: {personas[i].EstadoPersona}");
-            Console.WriteLine($"Metodo de pago: {personas[i].MetodoPago}");
-            Console.WriteLine($"Observaciones: {personas[i].Observaciones}");
-            Console.WriteLine($"Fecha apertura: {personas[i].FechaApertura}");
-            Console.WriteLine($"Limite credito: {personas[i].LimiteCredito}");
-            Console.WriteLine($"Estado: {personas[i].EstadoCuenta}");
-        }
-    }
-
     private static void Main()
     {
-        var lol = new Program();
         PersonaNegocio negocio = new PersonaNegocio();
         bool salir = false;
 
@@ -77,19 +34,19 @@ internal class Program
                     switch (opcion2)
                     {
                         case "1":
-                            lol.BuscarPersona("DNI", negocio);
+                            negocio.BuscarPersona("DNI");
                             break;
 
                         case "2":
-                            lol.BuscarPersona("Apellido", negocio);
+                            negocio.BuscarPersona("Apellido");
                             break;
 
                         case "3":
-                            lol.BuscarPersona("Nombres", negocio);
+                            negocio.BuscarPersona("Nombres");
                             break;
 
                         case "4":
-                            lol.BuscarPersona("Calle", negocio);
+                            negocio.BuscarPersona("Calle");
                             break;
 
                         case "5":
@@ -100,7 +57,7 @@ internal class Program
                             Console.WriteLine("Opción invalida.");
                             break;
                     }
-                    break; // <- faltaba: sin esto caía directo al case "2"
+                    break;
 
                 case "2":
                     try
@@ -176,62 +133,115 @@ internal class Program
                     try
                     {
                         Persona personaModificar = new Persona();
+
                         Console.Write("DNI a modificar: ");
                         int.TryParse(Console.ReadLine(), out int dniModi);
                         personaModificar.Dni = dniModi;
-                        Console.Write("Nuevo Nombre: ");
-                        personaModificar.Nombre = Console.ReadLine();
+
+                        Console.Write("Nuevo Nombre: (dejar en blanco para mantener el valor) ");
+                        string nombre = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(nombre)) personaModificar.Nombre = nombre;
+
                         Console.Write("Nuevo Apellido: ");
-                        personaModificar.Apellido = Console.ReadLine();
+                        string apellido = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(apellido)) personaModificar.Apellido = apellido;
+
                         Console.Write("Nueva Calle: ");
-                        personaModificar.Calle = Console.ReadLine();
+                        string calle = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(calle)) personaModificar.Calle = calle;
+
                         Console.Write("Nuevo Piso: ");
-                        personaModificar.Piso = Console.ReadLine();
+                        string piso = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(piso)) personaModificar.Piso = piso;
+
                         Console.Write("Nuevo Depto: ");
-                        personaModificar.Depto = Console.ReadLine();
+                        string depto = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(depto)) personaModificar.Depto = depto;
+
                         Console.Write("Nueva Ciudad: ");
-                        personaModificar.Ciudad = Console.ReadLine();
+                        string ciudad = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(ciudad)) personaModificar.Ciudad = ciudad;
+
                         Console.Write("Nuevo Telefono: ");
-                        personaModificar.Telefono = Console.ReadLine();
+                        string telefono = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(telefono)) personaModificar.Telefono = telefono;
+
                         Console.Write("Nuevo Email: ");
-                        personaModificar.Email = Console.ReadLine();
+                        string email = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(email)) personaModificar.Email = email;
+
                         Console.Write("Nuevo CUIL/CUIT: ");
-                        personaModificar.CuilCuit = Console.ReadLine();
+                        string cuilCuit = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(cuilCuit)) personaModificar.CuilCuit = cuilCuit;
+
                         Console.Write("Nueva Fecha de alta: ");
-                        personaModificar.FechaAlta = Console.ReadLine();
+                        string fechaAlta = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(fechaAlta)) personaModificar.FechaAlta = fechaAlta;
+
                         Console.Write("Nuevo Estado civil (Casado/Soltero): ");
-                        personaModificar.EstadoCivil = Console.ReadLine();
+                        string estadoCivil = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(estadoCivil)) personaModificar.EstadoCivil = estadoCivil;
+
                         Console.Write("Nueva Nacionalidad: ");
-                        personaModificar.Nacionalidad = Console.ReadLine();
+                        string nacionalidad = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(nacionalidad)) personaModificar.Nacionalidad = nacionalidad;
+
                         Console.Write("Nueva Provincia: ");
-                        personaModificar.Provincia = Console.ReadLine();
+                        string provincia = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(provincia)) personaModificar.Provincia = provincia;
+
                         Console.Write("Nuevo Codigo postal: ");
-                        personaModificar.CodigoPostal = Console.ReadLine();
+                        string codigoPostal = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(codigoPostal)) personaModificar.CodigoPostal = codigoPostal;
+
                         Console.Write("Nuevo Barrio: ");
-                        personaModificar.Barrio = Console.ReadLine();
+                        string barrio = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(barrio)) personaModificar.Barrio = barrio;
+
                         Console.Write("Nuevo Telefono alternativo: ");
-                        personaModificar.TelefonoAlternativo = Console.ReadLine();
+                        string telefonoAlt = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(telefonoAlt)) personaModificar.TelefonoAlternativo = telefonoAlt;
+
                         Console.Write("Nuevo Instagram: ");
-                        personaModificar.Instagram = Console.ReadLine();
+                        string instagram = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(instagram)) personaModificar.Instagram = instagram;
+
                         Console.Write("Nueva Profesion: ");
-                        personaModificar.Profesion = Console.ReadLine();
+                        string profesion = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(profesion)) personaModificar.Profesion = profesion;
+
                         Console.Write("Nueva Empresa: ");
-                        personaModificar.Empresa = Console.ReadLine();
+                        string empresa = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(empresa)) personaModificar.Empresa = empresa;
+
                         Console.Write("Nuevo Nivel de estudios: ");
-                        personaModificar.NivelEstudios = Console.ReadLine();
+                        string nivelEstudios = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(nivelEstudios)) personaModificar.NivelEstudios = nivelEstudios;
+
                         Console.Write("Nuevo Estado de la persona (Activo/Inactivo): ");
-                        personaModificar.EstadoPersona = Console.ReadLine();
+                        string estadoPersona = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(estadoPersona)) personaModificar.EstadoPersona = estadoPersona;
+
                         Console.Write("Nuevo Metodo de pago: ");
-                        personaModificar.MetodoPago = Console.ReadLine();
+                        string metodoPago = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(metodoPago)) personaModificar.MetodoPago = metodoPago;
+
                         Console.Write("Nuevas Observaciones: ");
-                        personaModificar.Observaciones = Console.ReadLine();
+                        string observaciones = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(observaciones)) personaModificar.Observaciones = observaciones;
+
                         Console.Write("Nueva Fecha apertura: ");
-                        personaModificar.FechaApertura = Console.ReadLine();
-                        Console.Write("Nuevo Limite credito: ");
-                        decimal.TryParse(Console.ReadLine(), out decimal limiteModi);
-                        personaModificar.LimiteCredito = limiteModi;
+                        string fechaApertura = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(fechaApertura)) personaModificar.FechaApertura = fechaApertura;
+
+                        Console.Write("Nuevo Limite credito (dejar en blanco para mantener el valor): ");
+                        string limiteTexto = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(limiteTexto) && decimal.TryParse(limiteTexto, out decimal limiteModi))
+                            personaModificar.LimiteCredito = limiteModi;
+
                         Console.Write("Nuevo Estado de la cuenta (Activo/Suspendido): ");
-                        personaModificar.EstadoCuenta = Console.ReadLine();
+                        string estadoCuenta = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(estadoCuenta)) personaModificar.EstadoCuenta = estadoCuenta;
 
                         bool modificado = negocio.ModificarPersona(personaModificar);
                         Console.WriteLine(modificado ? "Modificado con exito." : "No se pudo modificar.");

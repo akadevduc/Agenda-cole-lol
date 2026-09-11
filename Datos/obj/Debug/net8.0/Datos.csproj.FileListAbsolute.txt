@@ -2,3 +2,8 @@ C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.GeneratedMSBuild
 C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.AssemblyInfoInputs.cache
 C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.AssemblyInfo.cs
 C:\Users\Joacp\source\repos\Agenda\Datos\obj\Debug\net8.0\Datos.csproj.CoreCompileInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Datos\obj\Debug\net8.0\Datos.csproj.AssemblyReference.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Datos\obj\Debug\net8.0\Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Datos\obj\Debug\net8.0\Datos.AssemblyInfoInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Datos\obj\Debug\net8.0\Datos.AssemblyInfo.cs
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Datos\obj\Debug\net8.0\Datos.csproj.CoreCompileInputs.cache

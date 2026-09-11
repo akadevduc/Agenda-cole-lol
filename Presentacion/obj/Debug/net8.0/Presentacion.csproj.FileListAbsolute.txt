@@ -2,3 +2,8 @@ C:\Users\Joacp\source\repos\Agenda\Presentacion\obj\Debug\net8.0\Presentacion.Ge
 C:\Users\Joacp\source\repos\Agenda\Presentacion\obj\Debug\net8.0\Presentacion.AssemblyInfoInputs.cache
 C:\Users\Joacp\source\repos\Agenda\Presentacion\obj\Debug\net8.0\Presentacion.AssemblyInfo.cs
 C:\Users\Joacp\source\repos\Agenda\Presentacion\obj\Debug\net8.0\Presentacion.csproj.CoreCompileInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Presentacion\obj\Debug\net8.0\Presentacion.csproj.AssemblyReference.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Presentacion\obj\Debug\net8.0\Presentacion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Presentacion\obj\Debug\net8.0\Presentacion.AssemblyInfoInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Presentacion\obj\Debug\net8.0\Presentacion.AssemblyInfo.cs
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Presentacion\obj\Debug\net8.0\Presentacion.csproj.CoreCompileInputs.cache

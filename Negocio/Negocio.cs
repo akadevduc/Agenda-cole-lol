@@ -1,133 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; // hacía falta para el .Contains(campo, StringComparer...) de CamposValidos
-using Datos; //lee a Datos
+using System.Linq;
+using Datos;
+using Entidades;
 
 namespace Negocio
 {
-    public class Persona
-    {
-        private int _dni;
-        private string _nombre;
-        private string _estadoPersona;
-        private string _estadoCivil;
-        private string _estadoCuenta;
-
-        public int Dni
-        {
-            get => _dni;
-            set => _dni = value <= 0
-                ? throw new ArgumentException("El DNI debe ser un número positivo.")
-                : value;
-        }
-
-        public string Nombre
-        {
-            get => _nombre;
-            set => _nombre = string.IsNullOrWhiteSpace(value)
-                ? throw new ArgumentException("El nombre no puede estar vacío.")
-                : value;
-        }
-
-        public string Apellido { get; set; }
-        public string Calle { get; set; }
-        public string Piso { get; set; }
-        public string Depto { get; set; }
-        public string Ciudad { get; set; }
-        public string Telefono { get; set; }
-        public string Email { get; set; }
-        public string CuilCuit { get; set; }
-        public string FechaAlta { get; set; }
-        public string EstadoCivil
-        {
-            get => _estadoCivil;
-            set
-            {
-                if (!string.Equals(value, "Casado", StringComparison.OrdinalIgnoreCase) &&
-                    !string.Equals(value, "Soltero", StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException("El estado civil debe ser 'Casado' o 'Soltero'.");
-                _estadoCivil = value;
-            }
-        }
-        public string Nacionalidad { get; set; }
-        public string Provincia { get; set; }
-        public string CodigoPostal { get; set; }
-        public string Barrio { get; set; }
-        public string TelefonoAlternativo { get; set; }
-        public string Instagram { get; set; }
-        public string Profesion { get; set; }
-        public string Empresa { get; set; }
-        public string NivelEstudios { get; set; }
-        public string EstadoPersona
-        {
-            get => _estadoPersona;
-            set
-            {
-                if (!string.Equals(value, "Activo", StringComparison.OrdinalIgnoreCase) &&
-                    !string.Equals(value, "Inactivo", StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException("El estado de la persona debe ser 'Activo' o 'Inactivo'.");
-                _estadoPersona = value;
-            }
-        }
-        public string MetodoPago { get; set; }
-        public string Observaciones { get; set; }
-
-        public string FechaApertura { get; set; }
-        public decimal LimiteCredito { get; set; }
-        public string EstadoCuenta
-        {
-            get => _estadoCuenta;
-            set
-            {
-                if (!string.Equals(value, "Activo", StringComparison.OrdinalIgnoreCase) &&
-                    !string.Equals(value, "Suspendido", StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException("El estado de la cuenta debe ser 'Activo' o 'Suspendido'.");
-                _estadoCuenta = value;
-            }
-        }
-
-    }
 
     public class PersonaNegocio
     {
         private PersonaDatos _datos = new PersonaDatos();
 
         private static readonly string[] CamposValidos = { "DNI", "Apellido", "Nombres", "Calle" };
-
-        private FilaPersona ConvertirAFilaPersona(Persona persona)
-        {
-            return new FilaPersona
-            {
-                Dni = persona.Dni,
-                Apellido = persona.Apellido,
-                Nombre = persona.Nombre,
-                Calle = persona.Calle,
-                Piso = persona.Piso,
-                Depto = persona.Depto,
-                Ciudad = persona.Ciudad,
-                Telefono = persona.Telefono,
-                Email = persona.Email,
-                CuilCuit = persona.CuilCuit,
-                FechaAlta = persona.FechaAlta,
-                Nacionalidad = persona.Nacionalidad,
-                EstadoCivil = persona.EstadoCivil,
-                Provincia = persona.Provincia,
-                CodigoPostal = persona.CodigoPostal,
-                Barrio = persona.Barrio,
-                TelefonoAlternativo = persona.TelefonoAlternativo,
-                Instagram = persona.Instagram,
-                Profesion = persona.Profesion,
-                Empresa = persona.Empresa,
-                NivelEstudios = persona.NivelEstudios,
-                EstadoPersona = persona.EstadoPersona,
-                MetodoPago = persona.MetodoPago,
-                Observaciones = persona.Observaciones,
-
-                FechaApertura = persona.FechaApertura,
-                LimiteCredito = persona.LimiteCredito,
-                Estado = persona.EstadoCuenta
-            };
-        }
 
         public List<Persona> ObtenerPersona(string campo, string valor)
         {
@@ -138,42 +22,7 @@ namespace Negocio
 
             if (resultados == null || resultados.Count == 0) return null;
 
-            var lista = new List<Persona>();
-            foreach (var r in resultados)
-            {
-                lista.Add(new Persona
-                {
-                    Dni = r.Dni,
-                    Apellido = r.Apellido,
-                    Nombre = r.Nombre,
-                    Calle = r.Calle,
-                    Piso = r.Piso,
-                    Depto = r.Depto,
-                    Ciudad = r.Ciudad,
-                    Telefono = r.Telefono,
-                    Email = r.Email,
-                    CuilCuit = r.CuilCuit,
-                    FechaAlta = r.FechaAlta,
-                    EstadoCivil = r.EstadoCivil,
-                    Nacionalidad = r.Nacionalidad,
-                    Provincia = r.Provincia,
-                    CodigoPostal = r.CodigoPostal,
-                    Barrio = r.Barrio,
-                    TelefonoAlternativo = r.TelefonoAlternativo,
-                    Instagram = r.Instagram,
-                    Profesion = r.Profesion,
-                    Empresa = r.Empresa,
-                    NivelEstudios = r.NivelEstudios,
-                    EstadoPersona = r.EstadoPersona,
-                    MetodoPago = r.MetodoPago,
-                    Observaciones = r.Observaciones,
-
-                    FechaApertura = r.FechaApertura,
-                    LimiteCredito = r.LimiteCredito,
-                    EstadoCuenta = r.Estado
-                });
-            }
-            return lista;
+            return resultados;
         }
 
         public bool AgregarPersona(Persona persona)
@@ -184,15 +33,90 @@ namespace Negocio
             var existentes = _datos.Buscar("DNI", persona.Dni.ToString());
             if (existentes != null && existentes.Count > 0) return false;
 
-            return _datos.Add(ConvertirAFilaPersona(persona));
+            return _datos.Add(persona);
         }
 
-        public bool ModificarPersona(Persona persona)
+        public bool ModificarPersona(Persona personaNueva)
         {
-            if (persona == null) return false;
-            if (persona.Dni <= 0) return false;
+            if (personaNueva == null) return false;
+            if (personaNueva.Dni <= 0) return false;
 
-            return _datos.Modi(ConvertirAFilaPersona(persona));
+            var actuales = _datos.Buscar("DNI", personaNueva.Dni.ToString());
+            if (actuales == null || actuales.Count == 0) return false;
+            var actual = actuales[0];
+
+            personaNueva.Apellido = personaNueva.Apellido ?? actual.Apellido;
+            personaNueva.Calle = personaNueva.Calle ?? actual.Calle;
+            personaNueva.Piso = personaNueva.Piso ?? actual.Piso;
+            personaNueva.Depto = personaNueva.Depto ?? actual.Depto;
+            personaNueva.Ciudad = personaNueva.Ciudad ?? actual.Ciudad;
+            personaNueva.Telefono = personaNueva.Telefono ?? actual.Telefono;
+            personaNueva.Email = personaNueva.Email ?? actual.Email;
+            personaNueva.CuilCuit = personaNueva.CuilCuit ?? actual.CuilCuit;
+            personaNueva.FechaAlta = personaNueva.FechaAlta ?? actual.FechaAlta;
+            personaNueva.Nacionalidad = personaNueva.Nacionalidad ?? actual.Nacionalidad;
+            personaNueva.Provincia = personaNueva.Provincia ?? actual.Provincia;
+            personaNueva.CodigoPostal = personaNueva.CodigoPostal ?? actual.CodigoPostal;
+            personaNueva.Barrio = personaNueva.Barrio ?? actual.Barrio;
+            personaNueva.TelefonoAlternativo = personaNueva.TelefonoAlternativo ?? actual.TelefonoAlternativo;
+            personaNueva.Instagram = personaNueva.Instagram ?? actual.Instagram;
+            personaNueva.Profesion = personaNueva.Profesion ?? actual.Profesion;
+            personaNueva.Empresa = personaNueva.Empresa ?? actual.Empresa;
+            personaNueva.NivelEstudios = personaNueva.NivelEstudios ?? actual.NivelEstudios;
+            personaNueva.MetodoPago = personaNueva.MetodoPago ?? actual.MetodoPago;
+            personaNueva.Observaciones = personaNueva.Observaciones ?? actual.Observaciones;
+            personaNueva.FechaApertura = personaNueva.FechaApertura ?? actual.FechaApertura;
+
+            if (string.IsNullOrWhiteSpace(personaNueva.EstadoCivil)) personaNueva.EstadoCivil = actual.EstadoCivil;
+            if (string.IsNullOrWhiteSpace(personaNueva.EstadoPersona)) personaNueva.EstadoPersona = actual.EstadoPersona;
+            if (string.IsNullOrWhiteSpace(personaNueva.EstadoCuenta)) personaNueva.EstadoCuenta = actual.EstadoCuenta;
+
+            if (personaNueva.LimiteCredito == 0) personaNueva.LimiteCredito = actual.LimiteCredito;
+
+            return _datos.Modi(personaNueva);
+        }
+
+        public void BuscarPersona(string dato)
+        {
+            Console.Write($"Ingrese {dato}: ");
+            string buscar = Console.ReadLine();
+            List<Persona> personas = ObtenerPersona(dato, buscar);
+
+            if (personas == null || personas.Count == 0)
+            {
+                Console.WriteLine("No existe.");
+                return;
+            }
+
+            for (int i = 0; i < personas.Count; i++)
+            {
+                Console.WriteLine($"Encontrado: DNI: {personas[i].Dni}");
+                Console.WriteLine($"Nombre completo: {personas[i].Nombre}, {personas[i].Apellido}");
+                Console.WriteLine($"Calle: {personas[i].Calle}");
+                Console.WriteLine($"Depto: {personas[i].Depto}");
+                Console.WriteLine($"Piso: {personas[i].Piso}");
+                Console.WriteLine($"Ciudad: {personas[i].Ciudad}");
+                Console.WriteLine($"Telefono: {personas[i].Telefono}");
+                Console.WriteLine($"Email: {personas[i].Email}");
+                Console.WriteLine($"CUIL/CUIT: {personas[i].CuilCuit}");
+                Console.WriteLine($"Fecha de alta: {personas[i].FechaAlta}");
+                Console.WriteLine($"Estado civil: {personas[i].EstadoCivil}");
+                Console.WriteLine($"Nacionalidad: {personas[i].Nacionalidad}");
+                Console.WriteLine($"Provincia: {personas[i].Provincia}");
+                Console.WriteLine($"Codigo postal: {personas[i].CodigoPostal}");
+                Console.WriteLine($"Barrio: {personas[i].Barrio}");
+                Console.WriteLine($"Telefono alternativo: {personas[i].TelefonoAlternativo}");
+                Console.WriteLine($"Instagram: {personas[i].Instagram}");
+                Console.WriteLine($"Profesion: {personas[i].Profesion}");
+                Console.WriteLine($"Empresa: {personas[i].Empresa}");
+                Console.WriteLine($"Nivel de estudios: {personas[i].NivelEstudios}");
+                Console.WriteLine($"Estado Persona: {personas[i].EstadoPersona}");
+                Console.WriteLine($"Metodo de pago: {personas[i].MetodoPago}");
+                Console.WriteLine($"Observaciones: {personas[i].Observaciones}");
+                Console.WriteLine($"Fecha apertura: {personas[i].FechaApertura}");
+                Console.WriteLine($"Limite credito: {personas[i].LimiteCredito}");
+                Console.WriteLine($"Estado de Cuenta: {personas[i].EstadoCuenta}");
+            }
         }
 
         public bool EliminarPersona(int dni)

@@ -2,3 +2,8 @@ C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.GeneratedMSB
 C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfoInputs.cache
 C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfo.cs
 C:\Users\Joacp\source\repos\Agenda\Negocio\obj\Debug\net8.0\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Negocio\obj\Debug\net8.0\Negocio.csproj.AssemblyReference.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Negocio\obj\Debug\net8.0\Negocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfoInputs.cache
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Negocio\obj\Debug\net8.0\Negocio.AssemblyInfo.cs
+C:\Users\Alumno_invitado\Downloads\Agenda-cole-lol-main\Agenda-cole-lol-main\Negocio\obj\Debug\net8.0\Negocio.csproj.CoreCompileInputs.cache
